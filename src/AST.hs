@@ -60,6 +60,11 @@ data Expr
         appAtoms :: [Atom],
         appPosn  :: Posn
     }
+    | CtrE {
+        ctrType  :: Ctr,
+        ctrAtoms :: [Atom],
+        ctrPosn  :: Posn
+    }
     | OpE {
         opType  :: PrimOp,
         opAtoms :: [Atom],
@@ -145,6 +150,8 @@ instance PP Expr where
         pp pos <> text "case" <+> pp expr <+> text "of" $$ pp alts
     pp (AppE var args pos) =
         pp pos <> text var <+> ppAtoms args
+    pp (CtrE ctr args pos) =
+        pp pos <> text ctr <+> ppAtoms args
     pp (OpE op args pos) =
         pp pos <> pp op <+> ppAtoms args
     pp (LitE val pos) =

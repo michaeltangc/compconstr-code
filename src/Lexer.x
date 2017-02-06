@@ -39,6 +39,7 @@ stg :-
 
     "="                         { makeToken TEquals                         }
     ";"                         { makeToken TSemicolon                      }
+    "\\"                        { makeToken TLambda                         }
     "->"                        { makeToken TArrow                          }
     "{"                         { makeToken TCurlyL                         }
     "}"                         { makeToken TCurlyR                         }
@@ -51,6 +52,7 @@ stg :-
     "of"                        { makeToken TOf                             }
     "default"                   { makeToken TDefault                        }
 
+
     "\u"                        { makeToken TUpdatable                      }
     "\n"                        { makeToken TNotUpdatable                   }
 
@@ -62,6 +64,7 @@ stg :-
     "/#"                        { makeToken (TPrimOp PrimDiv)               }
 
     @var                        { makeTokenWith TVar                        }
+    @ctr                        { makeTokenWith TCtr                        }  
 {
 --------------------------------------------------------------------------------
 

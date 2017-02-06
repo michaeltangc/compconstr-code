@@ -25,6 +25,7 @@ data Token = TVar String -- ^ Variables [a-z][a-zA-Z0-9]*
            -- symbols
            | TEquals
            | TSemicolon
+           | TLambda
            | TArrow
            | TCurlyL
            | TCurlyR
@@ -39,6 +40,8 @@ data Token = TVar String -- ^ Variables [a-z][a-zA-Z0-9]*
            | TDefault
            | TUpdatable
            | TNotUpdatable
+           
+           | TCtr String
 
            -- primitives
            | TPrimInt PrimInt
@@ -56,6 +59,7 @@ instance PP Token where
 
     pp TEquals       = char '='
     pp TSemicolon    = char ';'
+    pp TLambda       = char '\\'
     pp TArrow        = text "->"
     pp TCurlyL       = char '{'
     pp TCurlyR       = char '}'
@@ -69,6 +73,7 @@ instance PP Token where
     pp TDefault      = text "default"
     pp TUpdatable    = text "\\u"
     pp TNotUpdatable = text "\\n"
+    pp (TCtr ctr)    = text "constructor" <+> text ctr
 
     pp (TPrimInt n)  = pp n
     pp (TPrimOp op)  = pp op

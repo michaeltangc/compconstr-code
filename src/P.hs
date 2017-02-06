@@ -84,7 +84,7 @@ mkAppE :: TokenP -> [Atom] -> P Expr
 mkAppE (TVar var, pos) as = return $ AppE var as (toPosn pos)
 
 mkCtrE :: TokenP -> [Atom] -> P Expr
-mkCtrE = undefined
+mkCtrE (TCtr ctr, pos) as = return $ CtrE ctr as (toPosn pos)
 
 mkOpE :: TokenP -> [Atom] -> P Expr
 mkOpE (TPrimOp op, pos) as = return $ OpE op as (toPosn pos)
@@ -93,7 +93,7 @@ mkLitE :: TokenP -> P Expr
 mkLitE (TPrimInt val, pos) = return $ LitE val (toPosn pos)
 
 mkAlgAlt :: TokenP -> [Var] -> Expr -> P AlgAlt
-mkAlgAlt = undefined
+mkAlgAlt (TCtr ctr, pos) vars expr = return $ AAlt ctr vars expr (toPosn pos)
 
 mkPrimAlt :: TokenP -> Expr -> P PrimAlt
 mkPrimAlt (TPrimInt val, pos) expr = return $ PAlt val expr (toPosn pos)
