@@ -16,12 +16,21 @@ import Options.Applicative
 --------------------------------------------------------------------------------
 
 data CmdArgs = MkCmdArgs {
-    argsInputs :: [FilePath]
+    argsInputs :: [FilePath],
+    argsEntry  :: String,
+    argsQuiet  :: Bool
 }
 
 cmdArgsP :: Parser CmdArgs
 cmdArgsP = MkCmdArgs
     <$> many (argument str (metavar "FILES..."))
+    <*> strOption (long "entry"      <>
+                   short 'e'         <>
+                   metavar "BINDING" <>
+                   value "main"      <>
+                   help "Name of the program's entry point")
+    <*> switch (long "no-stdin" <>
+                help "Tells the compiler that no stdin is available/usable.")
 
 cmdArgsOpts :: ParserInfo CmdArgs
 cmdArgsOpts = info (helper <*> cmdArgsP) fullDesc
