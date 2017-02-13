@@ -25,7 +25,7 @@ import Interpreter
 --------------------------------------------------------------------------------
 
 files :: [FilePath]
-files = ["tests/Map.stg"]
+files = ["tests/Map.stg", "tests/Map_2.stg"]
 
 capture :: IO () -> IO String
 capture m = do

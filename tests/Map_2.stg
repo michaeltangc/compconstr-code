@@ -1,0 +1,14 @@
+succ = {} \n {x} -> +# {x, 1#};
+
+list = {} \n {} -> let nil = {} \n {} -> Nil {}; 
+                   in Cons {5#, nil};
+
+map = {} \n {f,xs} ->
+        case xs {} of
+            Nil {}      -> Nil {};
+            Cons {y,ys} -> let fy = {f,y} \u {} -> f {y};
+                               mfy = {f,ys} \u {} -> map {f,ys};
+                               in Cons {fy,mfy};
+            default     -> Nil {};
+
+main = {} \n {} -> map {succ, list};
